@@ -1,25 +1,43 @@
 import typer
-from aws_earlychecker import core
 from rich import print
+from aws_earlychecker.interfaces.callback import AppCallback
+from aws_earlychecker.interfaces.cli_interface import CLIInterface
+from aws_earlychecker.interfaces.exception import ExceptionHandler
 
-app = typer.Typer(help="AWS EarlyCheck CLI – detect AWS service degradation early.")
+class AWSEarlyCheckerCLI(CLIInterface):
+    def __init__(self):
+        self.name = "AWS EarlyChecker"
 
-@app.command()
-def status(
-    region: str = typer.Option(..., help="AWS region to check, e.g., us-east-1"),
-    services: str = typer.Option("sns,sqs,s3", help="Comma-separated list of AWS services")
-):
-    """
-    Check AWS service health for a region.
-    """
-    service_list = [s.strip().upper() for s in services.split(",")]
-    results = core.check_services(region, service_list)
+    def register(self, app: typer.Typer, callback: AppCallback=None, exception_handler: ExceptionHandler=None):
+        """Attach commands, callback, and error handler."""
+        from aws_earlychecker.cli_options import version, region, profile, aws_cli_checker, status
+
+        app.command(name="version")(version.version)
+        app.command(name="region")(region.region)
+        app.command(name="check_profile")(profile.profile)
+        app.command(name="check_aws_cli")(aws_cli_checker.aws_cli_checker)
+        app.command(name="status")(status.status)
+
+        if callback:
+            app.callback()(callback.callback)
+
+        if exception_handler:
+            exception_handler.register_exceptions(app)
+
+    def run(self):
+        """Any pre-launch logic, like loading configuration or AWS credentials."""
+        print("[blue]Initializing AWS EarlyChecker CLI...[/blue]")
+
+    @staticmethod
+    def get_app_callback() -> AppCallback:
+        """Return the main application callback."""
+        from aws_earlychecker.callbacks.cli_callback import CliCallback
+        return CliCallback()    
     
-    for svc, state in results.items():
-        if state == "OPERATIONAL":
-            print(f"[green]✅ {svc}: {state}[/green]")
-        else:
-            print(f"[red]⚠️ {svc}: {state}[/red]")
-
-if __name__ == "__main__":
-    app()
+    @staticmethod
+    def get_exception_handler() -> ExceptionHandler:
+        """Return the exception handler for the application."""
+        # from aws_earlychecker.exception import register_exceptions
+        # return register_exceptions
+        from aws_earlychecker.interfaces.exception import DefaultExceptionHandler
+        return DefaultExceptionHandler()

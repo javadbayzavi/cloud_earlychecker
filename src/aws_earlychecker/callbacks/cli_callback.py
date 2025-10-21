@@ -11,5 +11,3 @@ class CliCallback(AppCallback):
         """
         Root callback executed when no subcommand is provided.
         """
-        if ctx.invoked_subcommand is None:
-            print("[yellow]⚠️  No command provided. Use --help to see available commands.[/yellow]")

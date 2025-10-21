@@ -10,7 +10,7 @@ class AWSEarlyCheckerCLI(CLIInterface):
 
     def register(self, app: typer.Typer, callback: AppCallback=None, exception_handler: ExceptionHandler=None):
         """Attach commands, callback, and error handler."""
-        from aws_earlychecker.cli_options import version, region, profile, aws_cli_checker, status
+        from aws_earlychecker.cli_commands import version, region, profile, aws_cli_checker, status
 
         app.command(name="version")(version.version)
         app.command(name="region")(region.region)

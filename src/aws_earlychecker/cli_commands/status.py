@@ -1,0 +1,18 @@
+import typer
+import aws_earlychecker.core as core
+
+def status(
+    region: str = typer.Option(..., help="AWS region to check, e.g., us-east-1"),
+    services: str = typer.Option("sns,sqs,s3", help="Comma-separated list of AWS services")
+):
+    """
+    Check AWS service health for a region.
+    """
+    service_list = [s.strip().upper() for s in services.split(",")]
+    results = core.check_services(region, service_list)
+    
+    for svc, state in results.items():
+        if state == "OPERATIONAL":
+            print(f"[green]✅ {svc}: {state}[/green]")
+        else:
+            print(f"[red]⚠️ {svc}: {state}[/red]")

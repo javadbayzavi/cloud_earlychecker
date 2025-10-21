@@ -9,7 +9,8 @@ from aws_earlychecker.interfaces.exception import ExceptionHandler
 class AppRunner:
     """Responsible for wiring CLI implementations into Typer and executing them."""
 
-    def __init__(self, cli_impl: Type[CLIInterface]):
+    def __init__(self, cli_impl: Type[CLIInterface], environment: str = "test"):
+        self.environment = environment
         self.app = typer.Typer(help="AWS EarlyCheck CLI – detect AWS service degradation early.")
         self.cli_impl = cli_impl
 

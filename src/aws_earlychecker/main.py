@@ -1,4 +1,4 @@
-from aws_earlychecker.cli import AWSEarlyCheckerCLI
+from aws_earlychecker.cli.aws_cli import AWSEarlyCheckerCLI
 from aws_earlychecker.core.app_runner import AppRunner
 
 if __name__ == "__main__":

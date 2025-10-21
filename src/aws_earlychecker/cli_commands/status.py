@@ -1,7 +1,7 @@
 import typer
 from rich.console import Console
 from rich.table import Table
-from aws_earlychecker.exception import AWSHealthCheckError
+from aws_earlychecker.exceptions.exception import AWSHealthCheckError
 import aws_earlychecker.services.core as core
 
 def status(

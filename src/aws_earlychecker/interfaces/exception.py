@@ -1,7 +1,7 @@
 import typer
 from abc import ABC, abstractmethod
 from rich import print
-from aws_earlychecker.exception import (
+from aws_earlychecker.exceptions.exception import (
     AWSHealthCheckError
 )
 

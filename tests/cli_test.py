@@ -1,6 +1,6 @@
 import pytest
 from typer.testing import CliRunner
-from aws_earlychecker.cli.aws_cli import app
+from cloud_earlychecker.cli.aws_cli import app
 
 runner = CliRunner()
 

@@ -1,10 +1,10 @@
 import typer
 from typing import Type
 from rich import print
-from aws_earlychecker.interfaces.cli_interface import CLIInterface
-from aws_earlychecker.interfaces.callback import AppCallback
+from cloud_earlychecker.interfaces.cli_interface import CLIInterface
+from cloud_earlychecker.interfaces.callback import AppCallback
 
-from aws_earlychecker.interfaces.exception import ExceptionHandler
+from cloud_earlychecker.interfaces.exception import ExceptionHandler
 
 class AppRunner:
     """Responsible for wiring CLI implementations into Typer and executing them."""

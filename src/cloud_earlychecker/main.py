@@ -1,12 +1,12 @@
-from aws_earlychecker.core.app_runner import AppRunner
-from aws_earlychecker.core.environment import environment
+from cloud_earlychecker.core.app_runner import AppRunner
+from cloud_earlychecker.core.environment import environment
 from rich import print
 from rich.panel import Panel
 
 if __name__ == "__main__":
     match environment.get_current_provider():
         case "aws":
-            from aws_earlychecker.cli.aws_cli import AWSEarlyCheckerCLI
+            from cloud_earlychecker.cli.aws_cli import AWSEarlyCheckerCLI
         # case "azure":
         case "gcp" | "azrure":
             print(Panel(f"CLOUD_PROVIDER '{environment.get_current_provider()}' is not supported in this CLI.", style="red"))

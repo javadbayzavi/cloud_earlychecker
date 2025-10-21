@@ -1,6 +1,6 @@
 from rich import print
 import typer
-from aws_earlychecker.interfaces.callback import AppCallback
+from cloud_earlychecker.interfaces.callback import AppCallback
 
 class CliCallback(AppCallback):
     """

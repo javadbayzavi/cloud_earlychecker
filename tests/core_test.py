@@ -1,4 +1,4 @@
-from aws_earlychecker import core
+from cloud_earlychecker import core
 
 def test_check_services():
     services = ["S3", "SNS"]

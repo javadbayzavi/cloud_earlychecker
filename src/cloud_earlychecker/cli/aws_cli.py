@@ -1,8 +1,8 @@
 import typer
 from rich import print
-from aws_earlychecker.interfaces.callback import AppCallback
-from aws_earlychecker.interfaces.cli_interface import CLIInterface
-from aws_earlychecker.interfaces.exception import ExceptionHandler
+from cloud_earlychecker.interfaces.callback import AppCallback
+from cloud_earlychecker.interfaces.cli_interface import CLIInterface
+from cloud_earlychecker.interfaces.exception import ExceptionHandler
 
 class AWSEarlyCheckerCLI(CLIInterface):
     def __init__(self):
@@ -10,7 +10,7 @@ class AWSEarlyCheckerCLI(CLIInterface):
 
     def register(self, app: typer.Typer, callback: AppCallback=None, exception_handler: ExceptionHandler=None):
         """Attach commands, callback, and error handler."""
-        from aws_earlychecker.cli_commands import version, region, profile, aws_cli_checker, status
+        from cloud_earlychecker.cli_commands import version, region, profile, aws_cli_checker, status
 
         app.command(name="version")(version.version)
         app.command(name="region")(region.region)
@@ -31,7 +31,7 @@ class AWSEarlyCheckerCLI(CLIInterface):
     @staticmethod
     def get_app_callback() -> AppCallback:
         """Return the main application callback."""
-        from aws_earlychecker.callbacks.cli_callback import CliCallback
+        from cloud_earlychecker.callbacks.cli_callback import CliCallback
         return CliCallback()    
     
     @staticmethod
@@ -39,5 +39,5 @@ class AWSEarlyCheckerCLI(CLIInterface):
         """Return the exception handler for the application."""
         # from aws_earlychecker.exception import register_exceptions
         # return register_exceptions
-        from aws_earlychecker.interfaces.exception import DefaultExceptionHandler
+        from cloud_earlychecker.interfaces.exception import DefaultExceptionHandler
         return DefaultExceptionHandler()

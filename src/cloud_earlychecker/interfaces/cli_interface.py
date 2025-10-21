@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 import typer
 
-from aws_earlychecker.interfaces.callback import AppCallback
-from aws_earlychecker.interfaces.exception import ExceptionHandler
+from cloud_earlychecker.interfaces.callback import AppCallback
+from cloud_earlychecker.interfaces.exception import ExceptionHandler
 
 
 class CLIInterface(ABC):

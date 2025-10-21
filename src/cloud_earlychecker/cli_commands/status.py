@@ -1,8 +1,8 @@
 import typer
 from rich.console import Console
 from rich.table import Table
-from aws_earlychecker.exceptions.exception import AWSHealthCheckError
-import aws_earlychecker.services.core as core
+from cloud_earlychecker.exceptions.exception import AWSHealthCheckError
+import cloud_earlychecker.services.core as core
 
 def status(
     region: str = typer.Option(..., help="AWS region to check, e.g., us-east-1"),

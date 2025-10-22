@@ -69,3 +69,6 @@ coverage.xml
 
 # Other
 *.log
+
+# app state file
+.cloud_earlychecker_state.json

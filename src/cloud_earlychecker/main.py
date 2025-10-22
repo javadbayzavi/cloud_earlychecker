@@ -18,6 +18,6 @@ if __name__ == "__main__":
     #Initialize the CLI application with callback and exception handler
     callback = AWSEarlyCheckerCLI.get_app_callback()
     exception_handler = AWSEarlyCheckerCLI.get_exception_handler()
-
+    
     runner = AppRunner(AWSEarlyCheckerCLI, environment=environment.get_environment())
     runner.run(callback=callback, exception_handler=exception_handler)

@@ -20,10 +20,13 @@ class CloudEnvironment:
             raise FileNotFoundError(f"Environment file '{self.dotenv_file}' not found or failed to load.")
 
     def get_current_provider(self) -> str:
-        return self.get_from_environment("CLOUD_PROVIDER")
+        return self.get("CLOUD_PROVIDER")
 
-    def get_from_environment(self, variable: str) -> str:
+    def get(self, variable: str) -> str:
         return os.getenv(variable, "")
+    
+    def set(self, variable: str, value: str):
+        os.environ[variable] = value
 
     def get_environment(self) -> str:
         return self.env
@@ -38,7 +41,7 @@ class CloudEnvironment:
         return self._is_provider_of("gcp")
     
     def _is_provider_of(self, provider_name: str) -> bool:
-        return self.get_from_environment("CLOUD_PROVIDER") == provider_name.lower()
+        return self.get("CLOUD_PROVIDER") == provider_name.lower()
 
 # singleton instance
 environment = CloudEnvironment()

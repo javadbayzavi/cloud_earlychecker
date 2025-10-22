@@ -1,5 +1,6 @@
 import typer
 from rich import print
+from cloud_earlychecker.core.app_state import AppState
 from cloud_earlychecker.interfaces.callback import AppCallback
 from cloud_earlychecker.interfaces.cli_interface import CLIInterface
 from cloud_earlychecker.interfaces.exception import ExceptionHandler
@@ -29,10 +30,13 @@ class AWSEarlyCheckerCLI(CLIInterface):
         print("[blue]Initializing AWS EarlyChecker CLI...[/blue]")
 
     @staticmethod
-    def get_app_callback() -> AppCallback:
+    def get_app_callback(appState: AppState = None) -> AppCallback:
         """Return the main application callback."""
         from cloud_earlychecker.callbacks.cli_callback import CliCallback
-        return CliCallback()    
+        if appState is None:
+            appState = AppState.create_default_state()
+            
+        return CliCallback(appState=appState)    
     
     @staticmethod
     def get_exception_handler() -> ExceptionHandler:
